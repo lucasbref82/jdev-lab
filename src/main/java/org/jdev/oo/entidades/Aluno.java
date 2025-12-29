@@ -119,6 +119,12 @@ public class Aluno {
         }
     }
 
+    public void adicionarNota(List<Double> notas) {
+        if (notas.isEmpty()){
+            throw new IllegalArgumentException("A notas não podem ser vazias");
+        }
+    }
+
     public void adicionarNota(double nota) {
         if (nota < 0) {
             throw new IllegalArgumentException("A nota deve ser maior que zero");

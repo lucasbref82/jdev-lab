@@ -26,7 +26,7 @@ public class Aluno {
     }
 
     public Aluno(String nome, int idade) {
-        validaIdadeAluno(nome, idade);
+        validaIdadeAluno(idade);
         this.nome = nome;
         this.idade = idade;
     }
@@ -44,6 +44,7 @@ public class Aluno {
     }
 
     public void setIdade(int idade) {
+        validaIdadeAluno(idade);
         this.idade = idade;
     }
 
@@ -112,9 +113,9 @@ public class Aluno {
     }
 
 
-    public void validaIdadeAluno(String nome, int idade) {
+    public void validaIdadeAluno(int idade) {
         if (idade < 0) {
-            throw new IllegalArgumentException("A idade do aluno: " + nome + "deve ser maior que zero");
+            throw new IllegalArgumentException("A idade do aluno deve ser maior que zero");
         }
     }
 

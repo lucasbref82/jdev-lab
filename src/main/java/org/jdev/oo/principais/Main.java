@@ -8,13 +8,18 @@ public class Main {
     public static void main(String[] args) {
 
         Aluno lucas = new Aluno();
-        lucas.nome = "Lucas";
-        System.out.printf("Nome do aluno um é %s.", lucas.nome);
+        lucas.setNome("Lucas");
+        lucas.setNomeEscola("Centro universitário UNA");
+        lucas.adicionarNota(20);
+        lucas.adicionarNota(15.5);
+        lucas.adicionarNota(12);
+        lucas.adicionarNota(21.9);
+
+        System.out.printf("O aluno %s que estuda no %s foi: %s", lucas.getNome(), lucas.getNomeEscola() , lucas.retornaAprovacaoAluno());
+
 
         // NullPointerException
         Aluno larissa = null;
-
-        System.out.printf("O nome do aluno dois é %s.", larissa.nome);
 
         Aluno pedro = new Aluno();
 

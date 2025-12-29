@@ -1,17 +1,21 @@
 package org.jdev.oo.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
 
-    public String nome;
-    public int idade;
-    public String dataNascimento;
-    public String registroGeral;
-    public String numeroCpf;
-    public String nomeMae;
-    public String nomePai;
-    public String dataMatricula;
-    public String nomeEscola;
-    public String serieMatriculado;
+    private String nome;
+    private int idade;
+    private String dataNascimento;
+    private String registroGeral;
+    private String numeroCpf;
+    private String nomeMae;
+    private String nomePai;
+    private String dataMatricula;
+    private String nomeEscola;
+    private String serieMatriculado;
+    private List<Double> notas = new ArrayList<>();
 
     public Aluno() { /* É o construtor padrão do java, mesmo não deixando explícito */
 
@@ -107,9 +111,27 @@ public class Aluno {
         this.serieMatriculado = serieMatriculado;
     }
 
+
     public void validaIdadeAluno(String nome, int idade) {
         if (idade < 0) {
             throw new IllegalArgumentException("A idade do aluno: " + nome + "deve ser maior que zero");
         }
+    }
+
+    public void adicionarNota(double nota) {
+        if (nota < 0) {
+            throw new IllegalArgumentException("A nota deve ser maior que zero");
+        }
+        notas.add(nota);
+    }
+
+    public String retornaAprovacaoAluno() {
+
+        double totalNota = notas
+                .stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
+
+        return totalNota < 60 ? "Reprovado!" : "Aprovado!";
     }
 }

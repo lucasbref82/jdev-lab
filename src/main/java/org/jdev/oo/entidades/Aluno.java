@@ -1,6 +1,5 @@
 package org.jdev.oo.entidades;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Aluno {
@@ -15,7 +14,7 @@ public class Aluno {
     private String dataMatricula;
     private String nomeEscola;
     private String serieMatriculado;
-    private List<Double> notas = new ArrayList<>();
+    private List<Disciplina> disciplinas;
 
     public Aluno() { /* É o construtor padrão do java, mesmo não deixando explícito */
 
@@ -112,6 +111,13 @@ public class Aluno {
         this.serieMatriculado = serieMatriculado;
     }
 
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
 
     public void validaIdadeAluno(int idade) {
         if (idade < 0) {
@@ -119,26 +125,31 @@ public class Aluno {
         }
     }
 
-    public void adicionarNota(List<Double> notas) {
-        if (notas.isEmpty()){
-            throw new IllegalArgumentException("A notas não podem ser vazias");
-        }
+    public double calcularMediaGeral() {
+        return disciplinas.stream()
+                .mapToDouble(Disciplina::recuperaMedia)
+                .average()
+                .orElse(0.0);
     }
 
-    public void adicionarNota(double nota) {
-        if (nota < 0) {
-            throw new IllegalArgumentException("A nota deve ser maior que zero");
-        }
-        notas.add(nota);
+    public String situacaoFinalAluno() {
+        double media = calcularMediaGeral();
+        return media >= 7 ? "APROVADO" : "REPROVADO";
     }
 
-    public String retornaAprovacaoAluno() {
-
-        double totalNota = notas
-                .stream()
-                .mapToDouble(Double::doubleValue)
-                .sum();
-
-        return totalNota < 60 ? "Reprovado!" : "Aprovado!";
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "nome='" + nome + '\'' +
+                ", idade=" + idade +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", registroGeral='" + registroGeral + '\'' +
+                ", numeroCpf='" + numeroCpf + '\'' +
+                ", nomeMae='" + nomeMae + '\'' +
+                ", nomePai='" + nomePai + '\'' +
+                ", dataMatricula='" + dataMatricula + '\'' +
+                ", nomeEscola='" + nomeEscola + '\'' +
+                ", serieMatriculado='" + serieMatriculado + '\'' +
+                '}';
     }
 }
